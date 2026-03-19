@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Management Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: "Segoe UI", sans-serif; margin:0; padding:0; background:#f4f6f7; }
+        h1 { color: #1abc9c; text-align:center; margin:20px 0; }
+        .container { max-width: 900px; margin: auto; padding: 20px; }
+        .cards { display:flex; gap:20px; flex-wrap:wrap; justify-content:center; margin-bottom:30px; }
+        .card { background:white; padding:20px; border-radius:12px; box-shadow:0 5px 15px rgba(0,0,0,0.1); flex:1 1 200px; text-align:center; }
+        .card h2 { margin:0; font-size:32px; color:#1abc9c; }
+        .card p { margin:5px 0 0; font-size:16px; color:#555; }
+        .charts { display:flex; flex-wrap:wrap; gap:30px; justify-content:center; margin-bottom:30px; }
+        .chart-box { background:white; padding:20px; border-radius:12px; box-shadow:0 5px 15px rgba(0,0,0,0.1); width: 400px; }
+        canvas { width:100% !important; height:300px !important; }
+
+        .insights {
+            margin-top:20px;
+            background:white;
+            padding:20px;
+            border-radius:12px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.1);
+            text-align:center;
+        }
+
+        .insights h3 {
+            color:#1abc9c;
+            margin-bottom:15px;
+        }
+
+        .insights p {
+            font-size:15px;
+            color:#555;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Management Dashboard</h1>
+
+<div class="container">
+
+    <!-- Summary Cards -->
+    <div class="cards">
+        <div class="card">
+            <h2>{{ total }}</h2>
+            <p>Total Feedback Submitted</p>
+        </div>
+        <div class="card">
+            <h2>{{ sentiment_counts.get('Positive', 0) }}</h2>
+            <p>Positive Feedbacks</p>
+        </div>
+        <div class="card">
+            <h2>{{ sentiment_counts.get('Neutral', 0) }}</h2>
+            <p>Neutral Feedbacks</p>
+        </div>
+        <div class="card">
+            <h2>{{ sentiment_counts.get('Negative', 0) }}</h2>
+            <p>Negative Feedbacks</p>
+        </div>
+    </div>
+
+    <!-- Chart -->
+    <div class="charts">
+        <div class="chart-box">
+            <h3>Overall Sentiment Distribution</h3>
+            <canvas id="sentimentChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Insights (Safe Version) -->
+    <div class="insights">
+        <h3>Insights</h3>
+        <p>📊 This dashboard shows overall sentiment distribution of student feedback.</p>
+        <p>💡 Add more backend logic later if you want detailed section-wise insights.</p>
+    </div>
+
+</div>
+
+<script>
+    const ctx = document.getElementById('sentimentChart').getContext('2d');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Positive', 'Neutral', 'Negative'],
+            datasets: [{
+                label: 'Number of Feedback Responses',
+                data: [
+                    {{ sentiment_counts.get('Positive', 0) }},
+                    {{ sentiment_counts.get('Neutral', 0) }},
+                    {{ sentiment_counts.get('Negative', 0) }}
+                ],
+                backgroundColor: ['#2ecc71', '#f1c40f', '#e74c3c']
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { stepSize: 1 }
+                }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Feedback ERP</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #f4f6f8;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        /* ERP Container */
+        .erp-container {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            margin: 30px auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-radius: 6px;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        /* ERP Image */
+        .erp-container img {
+            width: 100%;
+            display: block;
+        }
+
+        /* Common Tile Style */
+        .tile {
+            position: absolute;
+            width: 150px;
+            height: 105px;
+            border-radius: 6px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .tile:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.4);
+        }
+
+        .icon {
+            font-size: 30px;
+            margin-bottom: 6px;
+        }
+
+        .text {
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        /* Student Feedback Tile */
+        .feedback-tile {
+            top: 59%;
+            right: 4%;
+            background: #1abc9c;
+        }
+
+        /* Management Tile */
+        .management-tile {
+            top: 75%;
+            right: 4%;
+            background: #34495e;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="erp-container">
+
+    <!-- ERP Dashboard Image -->
+    <img src="/static/erp_dashboard.jpg" alt="Student ERP Dashboard">
+
+    <!-- Student Feedback -->
+    <a href="/feedback" class="tile feedback-tile">
+        <div class="icon">💬</div>
+        <div class="text">Student Feedback</div>
+    </a>
+
+    <!-- Management Dashboard -->
+    <a href="/view" class="tile management-tile">
+        <div class="icon">📊</div>
+        <div class="text">Management View</div>
+    </a>
+
+</div>
+
+</body>
+</html>
